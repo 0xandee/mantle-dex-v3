@@ -42,23 +42,42 @@ const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      accounts: {
-        mnemonic: MNEMONIC,
-      },
+      // accounts: {
+      //   mnemonic: MNEMONIC,
+      // },
       chainId: chainIds.hardhat,
+      allowUnlimitedContractSize: true,
     },
     mainnet: createTestnetConfig("mainnet"),
     goerli: createTestnetConfig("goerli"),
     kovan: createTestnetConfig("kovan"),
     rinkeby: createTestnetConfig("rinkeby"),
     ropsten: createTestnetConfig("ropsten"),
+    localhost: {
+      url: "http://127.0.0.1:8545",
+    },
+    mantle: {
+      url: "https://rpc.testnet.mantle.xyz",
+    },
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.17",
+        version: "0.5.16",
+      },
+      {
+        version: "0.6.6",
+      },
+      {
+        version: "0.8.0",
       },
     ],
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
   },
   etherscan: {
     apiKey: ETHERSCAN_API_KEY,
